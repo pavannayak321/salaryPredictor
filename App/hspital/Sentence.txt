@@ -1,0 +1,102 @@
+package prelearning;
+import java.util.Scanner;
+
+/*Write a program which reads a sentence as an input and perform below changes.
+step 1: First word is as it is
+step 2 : last word converted to its first and last letter and also converted to capital case
+step 3 : Rest all words should be replaced with next letter.
+
+Please find the below examples
+ Sample Input1: today is a good day
+Sample Output1: today jt b hppe DY
+ Sample Input2: India is my Country
+Sample Output2: India jt nz CY
+Note: No inbuilt method should be used from String other than indexOf(), charAt(), comparesTo(), equals() and length()
+*/
+public class SentenceManp {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		
+		/* Reading input from the User */
+		System.out.println("Please Enter The Sentence");
+		String sentence = sc.nextLine();
+		sc.close();
+		
+		
+		/*
+		 * Manipulated String
+		 */
+		String str = "";
+		
+		
+		//Finding the position of the first word with space encounter
+		int start_index = 0;
+		for(int i=0;i<sentence.length();i++)
+		{
+			if(sentence.charAt(i)==" ".charAt(0))
+			{
+				start_index  = i-1;
+				break;
+			}
+		}
+		
+		
+		//finding the last position of the word in a sentence
+		int end_index = sentence.length();
+		for(int i=sentence.length()-1; i>=0; i--) 
+		{
+			if(sentence.charAt(i)==" ".charAt(0))
+			{
+				end_index = i+1;
+				break;
+			}
+		}
+		
+		/*
+		 * appending the first word
+		 */
+		for(int i=0;i<=start_index;i++)
+		{
+			str = str+ sentence.charAt(i);
+		}
+		
+		
+		/*
+		 * Manipulating the mid characters
+		 */
+		for(int i=((start_index)+1); i < end_index; i++)
+		{
+			if(sentence.charAt(i)!=" ".charAt(0))
+			{
+				int a = sentence.charAt(i);
+				//incrementing the unicode value by one
+				a = a+1;
+				char c = (char)a;
+				str = str + c;
+			}
+			else
+				str = str + sentence.charAt(i);
+		}
+		
+		/*performing operation on the last word of sentence
+		 */
+		int f = sentence.charAt(end_index);
+		int s = sentence.charAt(sentence.length()-1);
+		
+		int a1 = (f>=97 && f <=123)?f-32:f;
+		int b1 = (s>=97 && s <=123)?s-32:s;
+		
+		char a11 = (char) a1;
+		char b11 = (char) b1;
+		
+		str = str+a11;
+		str = str + b11;
+		
+		System.out.println("The Final String is:  "+str);
+		
+
+	}
+
+}
